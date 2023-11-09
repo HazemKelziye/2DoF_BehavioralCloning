@@ -11,29 +11,22 @@ from pidcontroller import *
 import math
 import time
 import matplotlib.pyplot as plt
-import json
 from cnn import CNN2D
 import torch
-
 
 # load the pytorch model
 model = CNN2D()
 model.load_state_dict(torch.load("/home/vboxuser/PycharmProjects/2DoF_PID22/model_v2_dict.pth"))
 model.eval()
 
-EPISODES_NUMBER = 5
+EPISODES_NUMBER = 1
 SETPOINTS = [0, -1.05, 0]  # Setpoints/desired-points for optimizing the PID controller
-episodes = {}
 largest_reward = 0  # Dummy var for checking whether we landed successfully or not
 
-resulting_pattern = []  # add the 3 state 1 action pairs
-dataset = []  # aggregate the 3s,1a pairs
-
-sa_pairs = []  # For storing the state-action pairs
 state_history = []  # history for storing states and accessing them through t to (t+9)
 
 ACTION_X = 0  # !Setting the throttle's gimbal DoF to 0 permanently!
-action_y = -0.1
+action_y = -0.2
 action_theta = 0
 
 # map from the predicted class indices' to the actually discrete value
@@ -43,7 +36,7 @@ INVERSE_DISCRETE_ACTIONS = {0: -1.0, 1: -0.6, 2: -0.2, 3: 0.2, 4: 0.6, 5: 1.0}
 x_pos_data, y_pos_data, orient_data, vx_data, vy_data, omega_data = [], [], [], [], [], []
 
 # Initialization for our PID controllers with their Gains
-y_controller = PIDy(15000, 10, 5000, SETPOINTS[1])
+# y_controller = PIDy(15000, 10, 5000, SETPOINTS[1])
 theta_controller = PIDtheta(1000, 2.5, 750, SETPOINTS[2])
 
 env = gym.make('RocketLander-v0')
@@ -71,7 +64,7 @@ for ep_counter in range(1, EPISODES_NUMBER + 1):
     observation, _, done, _ = env.step(action_set)
     t = 0
     while True:
-        # time.sleep(0.000001)
+        time.sleep(0.001)
         print()
         print("t-timestep:", t)
         env.render()
@@ -86,7 +79,6 @@ for ep_counter in range(1, EPISODES_NUMBER + 1):
         omega_data.append(observation[9])
 
         # Taking actions w.r.t. the PID controller's feedback, If one of the legs contacts the ground i.e.
-        # MISSION_ACCOMPLISHED==1 set action_y = 0 (kill off throttle engine)
         # action_y = np.clip(y_controller.update(
         #     [observation[1], observation[8]], abs(observation[0]) + SETPOINTS[1]), -1.0, 1.0)
 
@@ -96,20 +88,14 @@ for ep_counter in range(1, EPISODES_NUMBER + 1):
         # Discretizing the input actions y and theta
         action_set = np.array([ACTION_X, action_y, discretize_actions(action_theta)])
 
-        # Adding the S-A pairs, the state-space's dimension is 5 and the action-space's dimension is 1
-        sa_pairs.append([[list(observation)[0]
-                             , list(observation)[1]
-                             , list(observation)[2]
-                             , list(observation)[7]
-                             , list(observation)[8]], list(action_set)[1:]])  # Adding the (s,a) pairs
-
         state_history.append([list(observation)[0]
-                             , list(observation)[1]
-                             , list(observation)[2]
-                             , list(observation)[7]
-                             , list(observation)[8]])
+                                 , list(observation)[1]
+                                 , list(observation)[2]
+                                 , list(observation)[7]
+                                 , list(observation)[8]])
 
-        if t >= 10 :
+        # check t >= 10 for state capturing from t - 9
+        if t >= 10:
             state_0 = state_history[t - 9]
             state_1 = state_history[t - 8]
             state_2 = state_history[t - 7]
@@ -138,12 +124,10 @@ for ep_counter in range(1, EPISODES_NUMBER + 1):
                 print("y_predicted class: ", predicted_class)
                 print("CNN's action_y : ", action_y)
 
-
         else:
             action_y = -0.2
 
         t += 1
-
 
         # Making a scheme for learning whether the landing was successful or not
         largest_reward = reward if reward > largest_reward else largest_reward
@@ -152,20 +136,11 @@ for ep_counter in range(1, EPISODES_NUMBER + 1):
             success = True if largest_reward >= 0.05 else False
             print(f"Simulation {ep_counter} done : {success}.")
 
-            episodes[f"episode{ep_counter}"] = sa_pairs
-            sa_pairs = []  # empty the list to store the s,a pairs of the next episode
-
             break
 
     env.close()
 
     state_history = []  # empty state_history for storing the new state_history variables, for the new episode
-
-
-# print(sa_pairs)
-# json_object = json.dumps(episodes)
-# with open("episodes_v4_5.json", "w") as outfile:
-#     outfile.write(json_object)
 
 
 # Function for plotting the response of the system
@@ -179,11 +154,10 @@ def plot_response():
     plt.legend()
     plt.grid()
     plt.ylim(-1.1, 1.1)
-    plt.title('2-DoF PID Control')
+    plt.title('2-DoF 1PID 1CNN Controller')
     plt.ylabel('Value')
     plt.xlabel('Steps')
     plt.show()
 
-# plot_response()  # Plotting the response of the system
 
-print(model)
+plot_response()  # Plotting the response of the system
