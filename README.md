@@ -28,7 +28,7 @@ For more clear demonstrations please refer to this link => https://youtu.be/NsNV
   )
   ```
 I used the last 10-timestep states as an input to my 2D convolutional neural network, and the label is the last action taken corresponding to the states.<br>
-![state2d](https://github.com/Hazem-Kelziye/2DoF_BehavioralCloning/assets/147067179/e9ad799d-3800-431d-87a3-8d16cee29bfc) <br><br>
+![](figures/state2d.png)<br><br>
 The model's parameters are the followings:<br>
 ```
 epoch_num = 50
@@ -37,11 +37,12 @@ learning_rate = 0.001
 optimizer = "Adam"
 loss = "Cross-entropy loss"
 ```
-The training process:<br>
-![model_acc_v2](https://github.com/Hazem-Kelziye/2DoF_BehavioralCloning/assets/147067179/2582bc00-2228-4047-97e9-ede257504f9a)
-![model_loss_v2](https://github.com/Hazem-Kelziye/2DoF_BehavioralCloning/assets/147067179/a800f8f7-bc80-4db8-9949-9f0c42348f0d)
+# The training process:<br>
+![](figures/model_acc_v2.png)<br>
+![](figures/model_loss_v2.png)<br><br>
 <br><br>
 Here are the responses of the system, for multiple random landing samples;
 
-![Figure_1](https://github.com/Hazem-Kelziye/2DoF_BehavioralCloning/assets/147067179/73152441-8a42-42c7-966e-d6fa32fa3e22)
-![Figure_2](https://github.com/Hazem-Kelziye/2DoF_BehavioralCloning/assets/147067179/a7ebc58e-f021-4b02-9376-2877a23adefc)
+![](figures/Figure_1_1.png)<br>
+![](figures/Figure_1_2.png)<br>
+![](figures/Figure_1_3.png)<br>
