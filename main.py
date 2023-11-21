@@ -1,9 +1,3 @@
-"""
-Created on Tue Oct 26 09:34:00 2023
-@author: Hazem
-"""
-
-# import gym
 import gym.spaces
 import numpy as np
 import rocket_lander_gym

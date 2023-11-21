@@ -1,5 +1,6 @@
 from gym.envs.registration import register
 
+
 register(
     id='RocketLander-v0',
     entry_point='rocket_lander_gym.envs:RocketLander',
