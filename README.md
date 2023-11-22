@@ -57,6 +57,7 @@ One state:<br>
 ![State example](figures/state2d.png)<br><br>
 
 ### Hyperparameter Selection:<br>
+logged data while training/testing using Wandb => https://wandb.ai/hazemk/BC-MultiHeaded-CNN/workspace?workspace=user-hazemk
 For hyperparameter optimization I used Wandb to log my training sessions, and compare each session with the other one, as a result these were an adequate combination:
 ```
 hyperparameters = {
