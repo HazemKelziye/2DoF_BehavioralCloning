@@ -88,6 +88,11 @@ loss = "Cross-entropy loss"
 ## Agent in Action:<br>
 For video demonstrations please refer to this link => https://youtu.be/gj1ZXEDRhz8
 
+![figure_1](figures/landing_rocket1.png)<br>
+![figure_1](figures/landing_rocket2.png)<br>
+![figure_1](figures/landing_rocket3.png)<br>
+
+
 ### Agent's Control Responses:<br>
 For multiple landings from different initial states:<br>
 ![figure_1](figures/bc_figure_1.png)<br>
