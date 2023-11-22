@@ -1,10 +1,9 @@
-import torch
 import torch.nn as nn
 
 
-class CNN2D_2headed_3(nn.Module):
+class CNN2D_2headed(nn.Module):
     def __init__(self):
-        super(CNN2D_2headed_3, self).__init__()
+        super(CNN2D_2headed, self).__init__()
 
         # Define the convolutional blocks
         self.conv_block1 = nn.Sequential(
