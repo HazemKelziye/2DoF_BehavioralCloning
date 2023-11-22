@@ -89,6 +89,6 @@ For video demonstrations please refer to this link => https://youtu.be/gj1ZXEDRh
 
 ### Agent's Control Responses:<br>
 For multiple landings from different initial states:<br>
-![figure_1](figures/Figure_1_1.png)<br>
-![figure_2](figures/Figure_1_2.png)<br>
-![figure_2](figures/Figure_1_3.png)<br>
+![figure_1](figures/bc_figure_1.png)<br>
+![figure_2](figures/bc_figure_2.png)<br>
+![figure_2](figures/bc_figure_3.png)<br>
