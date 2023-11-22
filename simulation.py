@@ -36,11 +36,7 @@ def run_simulation(env, model):
 
         action_set = np.array([ACTION_X, action_y, action_theta])
 
-        state_history.append([observation[0]
-                             , observation[1]
-                             , observation[2]
-                             , observation[7]
-                             , observation[8]])
+        state_history.append([observation[0], observation[1], observation[2], observation[7], observation[8]])
 
         if t >= 10:
             state_0 = state_history[t - 9]
