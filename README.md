@@ -54,7 +54,9 @@ The training process is done using training.py file whereby it make use of other
 ### Training Set:<br>
 The training set is created using the previous project's PID controller. The format of the data is a json file which have each episode number as a key and corresponding to it is the state,action pairs as the value.<br>
 One state:<br>
-![State example](figures/state2d.png)<br><br>
+<p align="center">
+  <img src="figures/state2d.png" alt="State example">
+</p>
 
 ### Hyperparameter Selection:<br>
 logged data while training/testing using Wandb => https://wandb.ai/hazemk/BC-MultiHeaded-CNN/workspace?workspace=user-hazemk<br>
@@ -88,13 +90,25 @@ loss = "Cross-entropy loss"
 ## Agent in Action:<br>
 For video demonstrations please refer to this link => https://youtu.be/gj1ZXEDRhz8
 
-![figure_1](figures/landing_rocket1.png)<br>
-![figure_1](figures/landing_rocket2.png)<br>
-![figure_1](figures/landing_rocket3.png)<br>
+<p align="center">
+  <img src="figures/landing_rocket1.png" alt="figure 1: Landing_demonstration">
+</p>
+<p align="center">
+  <img src="figures/landing_rocket2.png" alt="figure 2: Landing_demonstration">
+</p>
+<p align="center">
+  <img src="figures/landing_rocket3.png" alt="figure 3: Landing_demonstration">
+</p>
 
 
 ### Agent's Control Responses:<br>
 For multiple landings from different initial states:<br>
-![figure_1](figures/bc_figure_1.png)<br>
-![figure_2](figures/bc_figure_2.png)<br>
-![figure_2](figures/bc_figure_3.png)<br>
+<p align="center">
+  <img src="figures/bc_figure_1.png" alt="figure 4: State Response">
+</p>
+<p align="center">
+  <img src="figures/bc_figure_2.png" alt="figure 5: State Response">
+</p>
+<p align="center">
+  <img src="figures/bc_figure_3.png" alt="figure 6: State Response">
+</p>
